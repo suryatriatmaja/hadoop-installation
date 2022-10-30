@@ -146,7 +146,6 @@ chmod 0600 ~/.ssh/authorized_keys
 - Periksa status hadoop yang sudah dijalankan dengan perintah
 `jps`
     
-    ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/580e2f64-c9e0-4ed4-95b5-717519d34236/Untitled.png)
     
-    Selain itu, juga dapat dengan menjalankan Web UI Hadoop dengan membuka http://{IP Server}:9870/dfshealth.html dan http://{IP Server}:8088/cluster
+Selain itu, juga dapat dengan menjalankan Web UI Hadoop dengan membuka http://{IP Server}:9870/dfshealth.html dan http://{IP Server}:8088/cluster
 
