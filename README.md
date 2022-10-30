@@ -147,5 +147,6 @@ chmod 0600 ~/.ssh/authorized_keys
 `jps`
     
     
-Selain itu, juga dapat dengan menjalankan Web UI Hadoop dengan membuka http://{IP Server}:9870/dfshealth.html dan http://{IP Server}:8088/cluster
+Web UI Hadoop : -   http://{IP Server}:9870/dfshealth.html 
+                -   http://{IP Server}:8088/cluster
 
