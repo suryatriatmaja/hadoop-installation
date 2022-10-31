@@ -155,6 +155,7 @@ Web UI Hadoop : -   http://{IP Server}:9870/dfshealth.html
 
 # hadoop-installation (Single Node)
 
+```bash
 Pre-requirements
 Ubuntu 18.04 installed on a virtual machine.
 What are we going to install in order to create the Hadoop Multi-Node Cluster?
@@ -163,29 +164,37 @@ SSH;
 PDSH;
 1st Step: Configuring our Network
 Go to the Network Settings of your Virtual Machine and Enable Adapter 2. Then, instead of NAT, chose Virtual Host-Only Adapter and where it says “Promiscuous Mode” select the option “Allow All”.
+```
 
 
 2nd Step:
+```bash
 Install SSH using the following command:
 
 sudo apt install ssh
+
 It will ask you for the password. When it asks for confirmation, just give it.
+```
 
 
 3rd Step:
+```bash
 Install PDSH using the following command:
 
 sudo apt install pdsh
 Just as before, give confirmation when needed.
-
+```
 
 4th Step:
+```bash
 Open the .bashrc file with the following command:
 
 nano .bashrc
+
 At the end of the file just write the following line:
 
 export PDSH_RCMD_TYPE=ssh
+```
 
 5th Step:
 Now let’s configure SSH. Let’s create a new key using the following command:
