@@ -514,12 +514,12 @@ sudo nano /usr/local/hadoop/etc/hadoop/yarn-site.xml
 You have to add the following configurations on both slaves:
 ```
 **yarn-site.xml**
-    ```xml
+```xml
     <property>
-    <name>yarn.resourcemanager.hostname</name>
-    <value>hadoop-master</value>
+    	<name>yarn.resourcemanager.hostname</name>
+    	<value>hadoop-master</value>
     </property>
-    ```
+```
 
 33rd Step:
 ```bash
