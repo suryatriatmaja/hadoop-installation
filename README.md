@@ -400,15 +400,14 @@ sudo nano /usr/local/hadoop/etc/hadoop/core-site.xml
 Then add the following configurations:
 ```
 **core-site.xml**
-
-    ```xml
+```xml
     <configuration>
-    <property>
-    <name>fs.defaultFS</name>
-    <value>hdfs://hadoop-master:9000</value>
-    </property>
+    	<property>
+    		<name>fs.defaultFS</name>
+    		<value>hdfs://hadoop-master:9000</value>
+    	</property>
     </configuration>
-    ```
+```
 
 
 25th Step:
@@ -420,20 +419,20 @@ sudo nano /usr/local/hadoop/etc/hadoop/hdfs-site.xml
 Add the following configurations:
 ```
 **hdfs-site.xml**
-    ```xml
+```xml
     <configuration>
-    <property>
-    <name>dfs.namenode.name.dir</name><value>/usr/local/hadoop/data/nameNode</value>
-    </property>
-    <property>
-    <name>dfs.datanode.data.dir</name><value>/usr/local/hadoop/data/dataNode</value>
-    </property>
-    <property>
-    <name>dfs.replication</name>
-    <value>2</value>
-    </property>
+    	<property>
+    		<name>dfs.namenode.name.dir</name><value>/usr/local/hadoop/data/nameNode</value>
+    	</property>
+    	<property>
+    		<name>dfs.datanode.data.dir</name><value>/usr/local/hadoop/data/dataNode</value>
+    	</property>
+    	<property>
+    		<name>dfs.replication</name>
+    		<value>2</value>
+    	</property>
     </configuration>
-    ```
+```
 
 26th Step:
 ```bash
