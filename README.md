@@ -167,83 +167,83 @@ Go to the Network Settings of your Virtual Machine and Enable Adapter 2. Then, i
 ```
 
 
-2nd Step:
-```bash
-Install SSH using the following command:
+-   2nd Step:
+    ```bash
+    Install SSH using the following command:
 
-sudo apt install ssh
+    sudo apt install ssh
 
-It will ask you for the password. When it asks for confirmation, just give it.
-```
+    It will ask you for the password. When it asks for confirmation, just give it.
+    ```
 
 
-3rd Step:
-```bash
-Install PDSH using the following command:
+-   3rd Step:
+    ```bash
+    Install PDSH using the following command:
 
-sudo apt install pdsh
+    sudo apt install pdsh
 
-Just as before, give confirmation when needed.
-```
+    Just as before, give confirmation when needed.
+    ```
 
-4th Step:
-```bash
-Open the .bashrc file with the following command:
+-   4th Step:
+    ```bash
+    Open the .bashrc file with the following command:
 
-nano .bashrc
+    nano .bashrc
 
-At the end of the file just write the following line:
+    At the end of the file just write the following line:
 
-export PDSH_RCMD_TYPE=ssh
-```
+    export PDSH_RCMD_TYPE=ssh
+    ```
 
-5th Step:
-```bash
-Now let’s configure SSH. Let’s create a new key using the following command:
+-   5th Step:
+    ```bash
+    Now let’s configure SSH. Let’s create a new key using the following command:
 
-ssh-keygen -t rsa -P ""
+    ssh-keygen -t rsa -P ""
 
-Just press Enter everytime that is needed.
-```
+    Just press Enter everytime that is needed.
+    ```
 
-6th Step:
-```bash
-Now we need to copy the public key to the authorized_keys file with the following command:
+-   6th Step:
+    ```bash
+    Now we need to copy the public key to the authorized_keys file with the following command:
 
-cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
-```
+    cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+    ```
 
-7th Step:
-```bash
-Now we can verify the SSH configuration by connecting to the localhost:
+-   7th Step:
+    ```bash
+    Now we can verify the SSH configuration by connecting to the localhost:
 
-ssh localhost
+    ssh localhost
 
-Just type “yes” and press Enter when needed.
-```
+    Just type “yes” and press Enter when needed.
+    ```
 
-8th Step:
-```bash
-This is the step where we install Java 8. We use this command:
+-   8th Step:
+    ```bash
+    This is the step where we install Java 8. We use this command:
 
-sudo apt install openjdk-8-jdk
+    sudo apt install openjdk-8-jdk
 
-Just as previously, give confirmation when needed.
-```
+    Just as previously, give confirmation when needed.
+    ```
 
-9th Step:
-```bash
-This step isn’t really a step, it’s just to check if Java is now correctly installed:
+-   9th Step:
+    ```bash
+    This step isn’t really a step, it’s just to check if Java is now correctly installed:
 
-java -version
-```
+    java -version
+    ```
 
-10th Step:
-```bash
-Download Hadoop using the following command:
+-   10th Step:
+    ```bash
+    Download Hadoop using the following command:
 
-sudo wget -P ~ https://mirrors.sonic.net/apache/hadoop/common/hadoop-3.2.1/hadoop-3.2.1.tar.gz
-```
+    sudo wget -P ~ https://mirrors.sonic.net/apache/hadoop/common/hadoop-3.2.1/hadoop-3.2.1.tar.gz
+    ```
 
 11th Step:
 ```bash
@@ -397,14 +397,15 @@ On hadoop-master, open core-site.xml file on nano:
 sudo nano /usr/local/hadoop/etc/hadoop/core-site.xml
 
 Then add the following configurations:
-
-<configuration>
-<property>
-<name>fs.defaultFS</name>
-<value>hdfs://hadoop-master:9000</value>
-</property>
-</configuration>
 ```
+    ```xml
+    <configuration>
+    <property>
+    <name>fs.defaultFS</name>
+    <value>hdfs://hadoop-master:9000</value>
+    </property>
+    </configuration>
+    ```
 
 
 25th Step:
@@ -414,20 +415,21 @@ Still on hadoop-master, open the hdfs-site.xml file.
 sudo nano /usr/local/hadoop/etc/hadoop/hdfs-site.xml
 
 Add the following configurations:
-
-<configuration>
-<property>
-<name>dfs.namenode.name.dir</name><value>/usr/local/hadoop/data/nameNode</value>
-</property>
-<property>
-<name>dfs.datanode.data.dir</name><value>/usr/local/hadoop/data/dataNode</value>
-</property>
-<property>
-<name>dfs.replication</name>
-<value>2</value>
-</property>
-</configuration>
 ```
+    ```xml
+    <configuration>
+    <property>
+    <name>dfs.namenode.name.dir</name><value>/usr/local/hadoop/data/nameNode</value>
+    </property>
+    <property>
+    <name>dfs.datanode.data.dir</name><value>/usr/local/hadoop/data/dataNode</value>
+    </property>
+    <property>
+    <name>dfs.replication</name>
+    <value>2</value>
+    </property>
+    </configuration>
+    ```
 
 26th Step:
 ```bash
@@ -507,12 +509,13 @@ In both slaves, open yarn-site.xml on nano:
 
 sudo nano /usr/local/hadoop/etc/hadoop/yarn-site.xml
 You have to add the following configurations on both slaves:
-
-<property>
-<name>yarn.resourcemanager.hostname</name>
-<value>hadoop-master</value>
-</property>
 ```
+    ```xml
+    <property>
+    <name>yarn.resourcemanager.hostname</name>
+    <value>hadoop-master</value>
+    </property>
+    ```
 
 33rd Step:
 ```bash
