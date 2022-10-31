@@ -399,6 +399,8 @@ sudo nano /usr/local/hadoop/etc/hadoop/core-site.xml
 
 Then add the following configurations:
 ```
+**core-site.xml**
+
     ```xml
     <configuration>
     <property>
@@ -417,6 +419,7 @@ sudo nano /usr/local/hadoop/etc/hadoop/hdfs-site.xml
 
 Add the following configurations:
 ```
+**hdfs-site.xml**
     ```xml
     <configuration>
     <property>
@@ -511,6 +514,7 @@ In both slaves, open yarn-site.xml on nano:
 sudo nano /usr/local/hadoop/etc/hadoop/yarn-site.xml
 You have to add the following configurations on both slaves:
 ```
+**yarn-site.xml**
     ```xml
     <property>
     <name>yarn.resourcemanager.hostname</name>
