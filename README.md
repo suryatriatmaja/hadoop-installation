@@ -245,132 +245,133 @@ Go to the Network Settings of your Virtual Machine and Enable Adapter 2. Then, i
     sudo wget -P ~ https://mirrors.sonic.net/apache/hadoop/common/hadoop-3.2.1/hadoop-3.2.1.tar.gz
     ```
 
-11th Step:
-```bash
-We need to unzip the hadoop-3.2.1.tar.gz file with the following command:
+-   11th Step:
+    ```bash
+    We need to unzip the hadoop-3.2.1.tar.gz file with the following command:
 
-tar xzf hadoop-3.2.1.tar.gz
-```
+    tar xzf hadoop-3.2.1.tar.gz
+    ```
 
-12th Step:
-```bash
-Change the hadoop-3.2.1 folder name to hadoop (this maked it easier to use). Use this command:
+-   12th Step:
+    ```bash
+    Change the hadoop-3.2.1 folder name to hadoop (this maked it easier to use). Use this command:
 
-mv hadoop-3.2.1 hadoop
-```
+    mv hadoop-3.2.1 hadoop
+    ```
 
-13th Step:
-```bash
-Open the hadoop-env.sh file in the nano editor to edit JAVA_HOME:
+-   13th Step:
+    ```bash
+    Open the hadoop-env.sh file in the nano editor to edit JAVA_HOME:
 
-nano ~/hadoop/etc/hadoop/hadoop-env.sh
+    nano ~/hadoop/etc/hadoop/hadoop-env.sh
 
-Paste this line to JAVA_HOME:
+    Paste this line to JAVA_HOME:
 
-export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
-(I forgot to take a screenshot for this step, but it’s really easy to find. Once you find it just remove the # commentary tag and do what I said, copy it).
-```
+    export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
+    (I forgot to take a screenshot for this step, but it’s really easy to find. Once you find it just remove the # commentary tag and do what I said, copy it).
+    ```
 
-14th Step:
-```bash
-Change the hadoop folder directory to /usr/local/hadoop. This is the command:
+-   14th Step:
+    ```bash
+    Change the hadoop folder directory to /usr/local/hadoop. This is the command:
 
-sudo mv hadoop /usr/local/hadoop
+    sudo mv hadoop /usr/local/hadoop
 
-Provide the password when needed.
-```
+    Provide the password when needed.
+    ```
 
-15th Step:
-```bash
-Open the environment file on nano with this command:
+-   15th Step:
+    ```bash
+    Open the environment file on nano with this command:
 
-sudo nano /etc/environment
+    sudo nano /etc/environment
 
-Then, add the following configurations:
+    Then, add the following configurations:
 
-PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/hadoop/bin:/usr/local/hadoop/sbin"JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64/jre"
-```
-
-
-16th Step:
-```bash
-Now we will add a user called hadoopuser, and we will set up it’s configurations:
-
-sudo adduser hadoopuser
-
-Provide the password and you can leave the rest blank, just press Enter.
+    PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/hadoop/bin:/usr/local/hadoop/sbin"JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64/jre"
+    ```
 
 
-Now type these commands:
+-   16th Step:
+    ```bash
+    Now we will add a user called hadoopuser, and we will set up it’s configurations:
 
-sudo usermod -aG hadoopuser hadoopuser
-sudo chown hadoopuser:root -R /usr/local/hadoop/
-sudo chmod g+rwx -R /usr/local/hadoop/
-sudo adduser hadoopuser sudo
+    sudo adduser hadoopuser
 
-```
+    Provide the password and you can leave the rest blank, just press Enter.
 
-17th Step:
-```bash
-Now we need to verify the machine ip address:
 
-ip addr
+    Now type these commands:
 
-Now, as you can see, my IP is 192.168.205.7, just remember this will be different for you, you need to act accordingly when the IP addresses are used later.
+    sudo usermod -aG hadoopuser hadoopuser
+    sudo chown hadoopuser:root -R /usr/local/hadoop/
+    sudo chmod g+rwx -R /usr/local/hadoop/
+    sudo adduser hadoopuser sudo
 
-My network will be as follows:
+    ```
 
-master: 192.168.205.7
+-   17th Step:
+    ```bash
+    Now we need to verify the machine ip address:
 
-slave1: 192.168.205.8
+    ip addr
 
-slave2: 192.168.205.9
+    Now, as you can see, my IP is 192.168.205.7, just remember this will be different for you, you need to act accordingly when the IP addresses are used later.
 
-In your case, just keep adding 1 to the last number of the IP you get on your machine, just as I did for mine.
-```
+    My network will be as follows:
 
-18th Step:
-```bash
-Open the hosts file and insert your Network configurations:
+    master: 192.168.205.7
 
-sudo nano /etc/hosts
-```
+    slave1: 192.168.205.8
 
-19th Step:
-```bash
-Now is the time to create the Slaves.
+    slave2: 192.168.205.9
 
-Shut Down your Master Virtual Machine and clone it twice, naming one Slave1 and the Other Slave2.
+    In your case, just keep adding 1 to the last number of the IP you get on your machine, just as I did for mine.
+    ```
 
-Make sure the “Generate new MAC addresses for all network adapters” option is chosen.
+-   18th Step:
+    ```bash
+    Open the hosts file and insert your Network configurations:
 
-Also, make a Full Clone.
-```
+    sudo nano /etc/hosts
+    ```
+
+-   19th Step:
+    ```bash
+    Now is the time to create the Slaves.
+
+    Shut Down your Master Virtual Machine and clone it twice, naming one Slave1 and the Other Slave2.
+
+    Make sure the “Generate new MAC addresses for all network adapters” option is chosen.
+
+    Also, make a Full Clone.
+    ```
 
 
 Clone for Slave1, do the same for Slave2.
-20th Step:
-```bash
-On the master VM, open the hostname file on nano:
 
-sudo nano /etc/hostname
+-   20th Step:
+    ```bash
+    On the master VM, open the hostname file on nano:
 
-Insert the name of your master virtual machine. (note, it’s the same name you entered previously on the hosts file)
+    sudo nano /etc/hostname
+
+    Insert the name of your master virtual machine. (note, it’s the same name you entered previously on the hosts file)
 
 
-Now do the same on the slaves:
-Also, you should reboot all of them so this configuration taked effect:
+    Now do the same on the slaves:
+    Also, you should reboot all of them so this configuration taked effect:
 
-sudo reboot
+    sudo reboot
 
-```
+    ```
 
-21st Step:
-```bash
-Configure the SSH on hadoop-master, with the hadoopuser. This is the command:
+-   21st Step:
+    ```bash
+    Configure the SSH on hadoop-master, with the hadoopuser. This is the command:
 
-su - hadoopuser
-```
+    su - hadoopuser
+    ```
 
 22nd Step :
 ```bash
