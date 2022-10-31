@@ -182,6 +182,7 @@ It will ask you for the password. When it asks for confirmation, just give it.
 Install PDSH using the following command:
 
 sudo apt install pdsh
+
 Just as before, give confirmation when needed.
 ```
 
@@ -197,79 +198,106 @@ export PDSH_RCMD_TYPE=ssh
 ```
 
 5th Step:
+```bash
 Now let’s configure SSH. Let’s create a new key using the following command:
 
 ssh-keygen -t rsa -P ""
-Just press Enter everytime that is needed.
 
+Just press Enter everytime that is needed.
+```
 
 6th Step:
+```bash
 Now we need to copy the public key to the authorized_keys file with the following command:
 
 cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+```
 
 7th Step:
+```bash
 Now we can verify the SSH configuration by connecting to the localhost:
 
 ssh localhost
-Just type “yes” and press Enter when needed.
 
+Just type “yes” and press Enter when needed.
+```
 
 8th Step:
+```bash
 This is the step where we install Java 8. We use this command:
 
 sudo apt install openjdk-8-jdk
-Just as previously, give confirmation when needed.
 
+Just as previously, give confirmation when needed.
+```
 
 9th Step:
+```bash
 This step isn’t really a step, it’s just to check if Java is now correctly installed:
 
 java -version
+```
 
 10th Step:
+```bash
 Download Hadoop using the following command:
 
 sudo wget -P ~ https://mirrors.sonic.net/apache/hadoop/common/hadoop-3.2.1/hadoop-3.2.1.tar.gz
+```
 
 11th Step:
+```bash
 We need to unzip the hadoop-3.2.1.tar.gz file with the following command:
 
 tar xzf hadoop-3.2.1.tar.gz
+```
 
 12th Step:
+```bash
 Change the hadoop-3.2.1 folder name to hadoop (this maked it easier to use). Use this command:
 
 mv hadoop-3.2.1 hadoop
+```
 
 13th Step:
+```bash
 Open the hadoop-env.sh file in the nano editor to edit JAVA_HOME:
 
 nano ~/hadoop/etc/hadoop/hadoop-env.sh
+
 Paste this line to JAVA_HOME:
 
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
 (I forgot to take a screenshot for this step, but it’s really easy to find. Once you find it just remove the # commentary tag and do what I said, copy it).
+```
 
 14th Step:
+```bash
 Change the hadoop folder directory to /usr/local/hadoop. This is the command:
 
 sudo mv hadoop /usr/local/hadoop
-Provide the password when needed.
 
+Provide the password when needed.
+```
 
 15th Step:
+```bash
 Open the environment file on nano with this command:
 
 sudo nano /etc/environment
+
 Then, add the following configurations:
 
 PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/hadoop/bin:/usr/local/hadoop/sbin"JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64/jre"
+```
+
 
 16th Step:
+```bash
 Now we will add a user called hadoopuser, and we will set up it’s configurations:
 
 sudo adduser hadoopuser
+
 Provide the password and you can leave the rest blank, just press Enter.
 
 
@@ -280,7 +308,10 @@ sudo chown hadoopuser:root -R /usr/local/hadoop/
 sudo chmod g+rwx -R /usr/local/hadoop/
 sudo adduser hadoopuser sudo
 
+```
+
 17th Step:
+```bash
 Now we need to verify the machine ip address:
 
 ip addr
@@ -296,13 +327,17 @@ slave1: 192.168.205.8
 slave2: 192.168.205.9
 
 In your case, just keep adding 1 to the last number of the IP you get on your machine, just as I did for mine.
+```
 
 18th Step:
+```bash
 Open the hosts file and insert your Network configurations:
 
 sudo nano /etc/hosts
+```
 
 19th Step:
+```bash
 Now is the time to create the Slaves.
 
 Shut Down your Master Virtual Machine and clone it twice, naming one Slave1 and the Other Slave2.
@@ -310,43 +345,53 @@ Shut Down your Master Virtual Machine and clone it twice, naming one Slave1 and 
 Make sure the “Generate new MAC addresses for all network adapters” option is chosen.
 
 Also, make a Full Clone.
+```
 
 
 Clone for Slave1, do the same for Slave2.
 20th Step:
+```bash
 On the master VM, open the hostname file on nano:
 
 sudo nano /etc/hostname
+
 Insert the name of your master virtual machine. (note, it’s the same name you entered previously on the hosts file)
 
 
 Now do the same on the slaves:
-
-
-
 Also, you should reboot all of them so this configuration taked effect:
 
 sudo reboot
+
+```
+
 21st Step:
+```bash
 Configure the SSH on hadoop-master, with the hadoopuser. This is the command:
 
 su - hadoopuser
+```
 
-22nd Step
+22nd Step :
+```bash
 Create an SSH key:
 
 ssh-keygen -t rsa
+```
+
 
 23rd Step:
+```bash
 Now we need to copy the SSH key to all the users. Use this command:
 
 ssh-copy-id hadoopuser@hadoop-master
 ssh-copy-id hadoopuser@hadoop-slave1
 ssh-copy-id hadoopuser@hadoop-slave2
-
+```
 
 
 24th Step:
+```bash
 On hadoop-master, open core-site.xml file on nano:
 
 sudo nano /usr/local/hadoop/etc/hadoop/core-site.xml
@@ -359,8 +404,11 @@ Then add the following configurations:
 <value>hdfs://hadoop-master:9000</value>
 </property>
 </configuration>
+```
+
 
 25th Step:
+```bash
 Still on hadoop-master, open the hdfs-site.xml file.
 
 sudo nano /usr/local/hadoop/etc/hadoop/hdfs-site.xml
@@ -379,8 +427,10 @@ Add the following configurations:
 <value>2</value>
 </property>
 </configuration>
+```
 
 26th Step:
+```bash
 We’re still on hadoop-master, let’s open the workers file:
 
 sudo nano /usr/local/hadoop/etc/hadoop/workers
@@ -389,8 +439,11 @@ Add these two lines: (the slave names, remember the hosts file?)
 
 hadoop-slave1
 hadoop-slave2
+```
+
 
 27th Step:
+```bash
 We need to copy the Hadoop Master configurations to the slaves, to do that we use these commands:
 
 scp /usr/local/hadoop/etc/hadoop/* hadoop-slave1:/usr/local/hadoop/etc/hadoop/
@@ -399,13 +452,18 @@ scp /usr/local/hadoop/etc/hadoop/* hadoop-slave2:/usr/local/hadoop/etc/hadoop/
 Copying information to Slave1
 
 Copying Information to Slave2
+```
+
 28th Step:
+```bash
 Now we need to format the HDFS file system. Run these commands:
 
 source /etc/environment
 hdfs namenode -format
+```
 
 29th Step:
+```bash
 Start HDFS with this command:
 
 start-dfs.sh
@@ -415,10 +473,11 @@ To check if this worked, run the follwing command. This will tell you what resou
 jps
 
 Now we need to do the same in the slaves:
-
+```
 
 
 30th Step:
+```bash
 Let’s see if this worked:
 
 Open your browser and type hadoop-master:9870.
@@ -427,8 +486,11 @@ This is what mine shows, hopefully yours is showing the same thing!
 
 
 As you can see, both nodes are operational!
+```
+
 
 31st Step:
+```bash
 Let’s configure yarn, just execute the following commands:
 
 export HADOOP_HOME="/usr/local/hadoop"
@@ -437,8 +499,10 @@ export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
 export HADOOP_HDFS_HOME=$HADOOP_HOME
 export HADOOP_MAPRED_HOME=$HADOOP_HOME
 export HADOOP_YARN_HOME=$HADOOP_HOME
+```
 
 32nd Step:
+```bash
 In both slaves, open yarn-site.xml on nano:
 
 sudo nano /usr/local/hadoop/etc/hadoop/yarn-site.xml
@@ -448,15 +512,19 @@ You have to add the following configurations on both slaves:
 <name>yarn.resourcemanager.hostname</name>
 <value>hadoop-master</value>
 </property>
-
+```
 
 33rd Step:
+```bash
 On the master, let’s start yarn. Use this command:
 
 start-yarn.sh
+```
 
 34th Step:
+```bash
 Open your browser. Now you will type http://hadoop-master:8088/cluster
 
 
 As you can see, the cluster shows 2 active nodes!
+```
